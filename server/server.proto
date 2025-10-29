@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package demo;
+option go_package = "poc/server/demo";
+
+message lalaland {
+  string name = 1;
+  int32 age = 2;
+}

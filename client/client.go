@@ -13,6 +13,9 @@ func main() {
 	u := &demo.User{
 		Name: "Ahmed",
 		Age:  29,
+		Status: &demo.Status{
+			Status: "ACTIVE STATUS statususshdndiddk",
+		},
 	}
 
 	// Serialize the message

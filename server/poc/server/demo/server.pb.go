@@ -9,6 +9,7 @@ package demo
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -21,28 +22,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Lalaland struct {
+type Person struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Age           int32                  `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
+	Status        *NewNewStatus          `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Lalaland) Reset() {
-	*x = Lalaland{}
+func (x *Person) Reset() {
+	*x = Person{}
 	mi := &file_server_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Lalaland) String() string {
+func (x *Person) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Lalaland) ProtoMessage() {}
+func (*Person) ProtoMessage() {}
 
-func (x *Lalaland) ProtoReflect() protoreflect.Message {
+func (x *Person) ProtoReflect() protoreflect.Message {
 	mi := &file_server_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,33 +56,89 @@ func (x *Lalaland) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Lalaland.ProtoReflect.Descriptor instead.
-func (*Lalaland) Descriptor() ([]byte, []int) {
+// Deprecated: Use Person.ProtoReflect.Descriptor instead.
+func (*Person) Descriptor() ([]byte, []int) {
 	return file_server_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Lalaland) GetName() string {
+func (x *Person) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *Lalaland) GetAge() int32 {
+func (x *Person) GetAge() int32 {
 	if x != nil {
 		return x.Age
 	}
 	return 0
 }
 
+func (x *Person) GetStatus() *NewNewStatus {
+	if x != nil {
+		return x.Status
+	}
+	return nil
+}
+
+type NewNewStatus struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewNewStatus) Reset() {
+	*x = NewNewStatus{}
+	mi := &file_server_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewNewStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewNewStatus) ProtoMessage() {}
+
+func (x *NewNewStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_server_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewNewStatus.ProtoReflect.Descriptor instead.
+func (*NewNewStatus) Descriptor() ([]byte, []int) {
+	return file_server_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *NewNewStatus) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
 var File_server_proto protoreflect.FileDescriptor
 
 const file_server_proto_rawDesc = "" +
 	"\n" +
-	"\fserver.proto\x12\x04demo\"0\n" +
-	"\blalaland\x12\x12\n" +
+	"\fserver.proto\x12\x04demo\x1a\x1bgoogle/protobuf/empty.proto\"Z\n" +
+	"\x06Person\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
-	"\x03age\x18\x02 \x01(\x05R\x03ageB\x11Z\x0fpoc/server/demob\x06proto3"
+	"\x03age\x18\x02 \x01(\x05R\x03age\x12*\n" +
+	"\x06status\x18\x03 \x01(\v2\x12.demo.NewNewStatusR\x06status\"&\n" +
+	"\fNewNewStatus\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status2>\n" +
+	"\vUserService\x12/\n" +
+	"\aGetUser\x12\x16.google.protobuf.Empty\x1a\f.demo.PersonB\x11Z\x0fpoc/server/demob\x06proto3"
 
 var (
 	file_server_proto_rawDescOnce sync.Once
@@ -94,16 +152,21 @@ func file_server_proto_rawDescGZIP() []byte {
 	return file_server_proto_rawDescData
 }
 
-var file_server_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_server_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_server_proto_goTypes = []any{
-	(*Lalaland)(nil), // 0: demo.lalaland
+	(*Person)(nil),        // 0: demo.Person
+	(*NewNewStatus)(nil),  // 1: demo.NewNewStatus
+	(*emptypb.Empty)(nil), // 2: google.protobuf.Empty
 }
 var file_server_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: demo.Person.status:type_name -> demo.NewNewStatus
+	2, // 1: demo.UserService.GetUser:input_type -> google.protobuf.Empty
+	0, // 2: demo.UserService.GetUser:output_type -> demo.Person
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_server_proto_init() }
@@ -117,9 +180,9 @@ func file_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_server_proto_rawDesc), len(file_server_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_server_proto_goTypes,
 		DependencyIndexes: file_server_proto_depIdxs,

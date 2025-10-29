@@ -1,25 +1,27 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"log"
+	"net"
 
-	"google.golang.org/protobuf/proto"
+	"google.golang.org/grpc"
 
 	"example.com/server/poc/server/demo"
 )
 
 func main() {
-	// Read the binary file created by the client
-	data, err := os.ReadFile("../message.bin")
+	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
-		panic(err)
+		log.Fatalf("failed to listen: %v", err)
 	}
 
-	var p demo.Lalaland
-	if err := proto.Unmarshal(data, &p); err != nil {
-		panic(err)
-	}
+	s := grpc.NewServer()
 
-	fmt.Printf("✅ Server successfully decoded Person: %+v\n", p)
+	// Register service implementation
+	demo.RegisterUserServiceServer(s, NewUserService())
+
+	log.Printf("gRPC server listening on %s", lis.Addr().String())
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("server exited with error: %v", err)
+	}
 }

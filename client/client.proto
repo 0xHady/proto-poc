@@ -2,8 +2,18 @@ syntax = "proto3";
 
 package demo;
 option go_package = "poc/client/demo";
+import "google/protobuf/empty.proto";
+
+service UserService {
+  rpc GetUser (google.protobuf.Empty) returns (User);
+}
 
 message User {
   string name = 1;
   int32 age = 2;
+  Status status = 3;
+}
+
+message Status {
+  string status = 1;
 }

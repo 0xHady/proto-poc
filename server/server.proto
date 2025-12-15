@@ -10,11 +10,16 @@ service UserService {
 }
 
 message Person{
-  string name = 1;
+  optional string identifier = 1;
   int32 age = 2;
   NewNewStatus status = 3;
+  Success success = 4;
 }
 
 message NewNewStatus {
   string status = 1;
+}
+
+message Success {
+  string message = 1;
 }

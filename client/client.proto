@@ -12,8 +12,11 @@ message User {
   string name = 1;
   int32 age = 2;
   Status status = 3;
+  Success success = 4;
 }
 
 message Status {
   string status = 1;
 }
+
+message Success {}

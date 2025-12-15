@@ -17,11 +17,15 @@ func NewUserService() *userServiceServer {
 }
 
 func (s *userServiceServer) GetUser(ctx context.Context, _ *emptypb.Empty) (*demo.Person, error) {
+	name := "TEst UsEr"
 	return &demo.Person{
-		Name: "Test User",
-		Age:  42,
+		Identifier: &name,
+		Age:        42,
 		Status: &demo.NewNewStatus{ // matches server/server.proto
 			Status: "OK",
+		},
+		Success: &demo.Success{
+			Message: "Hello World",
 		},
 	}, nil
 }
